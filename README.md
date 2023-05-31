@@ -7,6 +7,7 @@
 ### Tools used
 
 Svelte + TypeScript + Vite
+
 Netlify + Github + EmailJS
 
 ## Run Locally
@@ -20,6 +21,7 @@ git clone https://github.com/Landon345/JS-Land-Improvement.git
 If you don't have git, download it here: https://git-scm.com/downloads
 
 In order to start the application on your own computer, run these commands in the new folder created by git.
+
 Use the command prompt, powershell, or the terminal in vs code.
 
 ```
