@@ -13,8 +13,8 @@
     sendingEmail = true;
     try {
       const result = await emailjs.sendForm(
-        "service_7rnn2zf",
-        "template_we8fzea",
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
         e.target,
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       );

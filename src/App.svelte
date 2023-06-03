@@ -9,18 +9,19 @@
   import Grading from "./routes/Grading.svelte";
   import LandClearing from "./routes/LandClearing.svelte";
   import TreeRemoval from "./routes/TreeRemoval.svelte";
+  import { Paths } from "./lib/Paths";
 </script>
 
 <Router>
   <div>
     <Header />
-    <Route path="/reviews"><Reviews /></Route>
-    <Route path="/about-us"><AboutUs /></Route>
-    <Route path="/brush-clearing"><BrushClearing /></Route>
-    <Route path="/grading"><Grading /></Route>
-    <Route path="/land-clearing"><LandClearing /></Route>
-    <Route path="/tree-removal"><TreeRemoval /></Route>
-    <Route path="/"><Home /></Route>
+    <Route path="{Paths.reviews}"><Reviews /></Route>
+    <Route path="{Paths.aboutUs}"><AboutUs /></Route>
+    <Route path="{Paths.brushClearing}"><BrushClearing /></Route>
+    <Route path="{Paths.grading}"><Grading /></Route>
+    <Route path="{Paths.landClearing}"><LandClearing /></Route>
+    <Route path="{Paths.treeRemoval}"><TreeRemoval /></Route>
+    <Route path="{Paths.home}"><Home /></Route>
     <Footer />
   </div>
 </Router>

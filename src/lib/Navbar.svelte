@@ -2,12 +2,19 @@
   import { link } from "svelte-routing";
   import MediaQuery from "svelte-media-queries";
   import { slide, fade } from "svelte/transition";
+  import { Paths } from "./Paths";
+  import BrushClearing from "../routes/BrushClearing.svelte";
 
   let navBarOpen = false;
-  let showServices = false;
+  let currentPage = window.location.pathname;
 
-  const close = () => (navBarOpen = false);
-  const closeServices = () => (showServices = false);
+  const close = () => {
+    navBarOpen = false;
+    currentPage = window.location.pathname;
+  };
+  const closeServices = () => {
+    currentPage = window.location.pathname;
+  };
 </script>
 
 <MediaQuery query="(max-width: 800px)" let:matches>
@@ -15,7 +22,7 @@
     <!-- svelte-ignore a11y-invalid-attribute -->
     <a
       use:link
-      class="list-link"
+      class="{`list-link ${currentPage === Paths.home ? 'highlight' : ''}`}"
       on:click="{() => (navBarOpen = !navBarOpen)}"
       href="#"
     >
@@ -37,41 +44,69 @@
       <nav class="nav-mobile" in:slide out:slide>
         <ul>
           <li>
-            <a use:link on:click="{close}" class="list-link" href="/">Home</a>
+            <a
+              use:link
+              on:click="{close}"
+              class="{`list-link ${
+                currentPage === Paths.home ? 'highlight' : ''
+              }`}"
+              href="{Paths.home}">Home</a
+            >
           </li>
           <li>
             <!-- svelte-ignore a11y-invalid-attribute -->
-            <a use:link on:click="{close}" class="list-link" href="#"
-              >Services</a
+            <a
+              use:link
+              on:click="{close}"
+              class="{`list-link ${
+                currentPage === Paths.treeRemoval ||
+                currentPage === Paths.brushClearing ||
+                currentPage === Paths.grading ||
+                currentPage === Paths.landClearing
+                  ? 'highlight'
+                  : ''
+              }`}"
+              href="#">Services</a
             >
             <ul class="inner-nav">
               <li>
                 <a
                   use:link
                   on:click="{close}"
-                  class="list-link"
-                  href="/brush-clearing">Forestry Mulching</a
-                >
-              </li>
-              <li>
-                <a use:link on:click="{close}" class="list-link" href="/grading"
-                  >Grading and Excavating</a
-                >
-              </li>
-              <li>
-                <a
-                  use:link
-                  on:click="{close}"
-                  class="list-link"
-                  href="/land-clearing">Land Clearing</a
+                  class="{`list-link ${
+                    currentPage === Paths.brushClearing ? 'highlight' : ''
+                  }`}"
+                  href="{Paths.brushClearing}">Forestry Mulching</a
                 >
               </li>
               <li>
                 <a
                   use:link
                   on:click="{close}"
-                  class="list-link"
-                  href="/tree-removal">Tree Service</a
+                  class="{`list-link ${
+                    currentPage === Paths.grading ? 'highlight' : ''
+                  }`}"
+                  href="{Paths.grading}">Grading and Excavating</a
+                >
+              </li>
+              <li>
+                <a
+                  use:link
+                  on:click="{close}"
+                  class="{`list-link ${
+                    currentPage === Paths.landClearing ? 'highlight' : ''
+                  }`}"
+                  href="{Paths.landClearing}">Land Clearing</a
+                >
+              </li>
+              <li>
+                <a
+                  use:link
+                  on:click="{close}"
+                  class="{`list-link ${
+                    currentPage === Paths.treeRemoval ? 'highlight' : ''
+                  }`}"
+                  href="{Paths.treeRemoval}">Tree Service</a
                 >
               </li>
             </ul>
@@ -80,71 +115,135 @@
             <a
               use:link
               on:click="{close}"
-              class="list-link"
-              href="/reviews/"
+              class="{`list-link ${
+                currentPage === Paths.reviews ? 'highlight' : ''
+              }`}"
+              href="{Paths.reviews}"
               aria-current="page">Reviews</a
-            >
-          </li>
-          <li>
-            <a use:link on:click="{close}" class="list-link" href="/about-us/"
-              >About Us</a
             >
           </li>
           <li>
             <a
               use:link
               on:click="{close}"
-              href="/contact-us/"
-              class="contact-us">Contact Us</a
+              class="{`list-link ${
+                currentPage === Paths.aboutUs ? 'highlight' : ''
+              }`}"
+              href="{Paths.aboutUs}">About Us</a
             >
+          </li>
+          <li>
+            <a
+              use:link
+              on:click="{close}"
+              href="{Paths.contactUs}"
+              class="{`contact-us ${
+                currentPage === Paths.contactUs ? 'highlight' : ''
+              }`}"
+            >
+              Contact Us
+            </a>
           </li>
         </ul>
       </nav>
     {/if}
   {:else}
     <nav class="nav-desktop">
-      <a use:link class="desktop-link" href="/">Home</a>
+      <a
+        use:link
+        on:click="{closeServices}"
+        class="{`desktop-link ${
+          currentPage === Paths.home ? 'highlight' : ''
+        }`}"
+        href="{Paths.home}"
+      >
+        Home
+      </a>
       <div class="dropdown">
         <!-- svelte-ignore a11y-invalid-attribute -->
-        <a use:link class="desktop-link dropbtn" href="#">Services</a>
+        <a
+          use:link
+          class="{`desktop-link dropbtn ${
+            currentPage === Paths.treeRemoval ||
+            currentPage === Paths.brushClearing ||
+            currentPage === Paths.grading ||
+            currentPage === Paths.landClearing
+              ? 'highlight'
+              : ''
+          }`}"
+          href="#">Services</a
+        >
         <ul class="desktop-service-links dropdown-content" in:fade out:fade>
           <li>
             <a
               use:link
               on:click="{closeServices}"
-              class="list-link"
-              href="/brush-clearing">Forestry Mulching</a
+              class="{`list-link ${
+                currentPage === Paths.brushClearing ? 'highlight' : ''
+              }`}"
+              href="{Paths.brushClearing}">Forestry Mulching</a
             >
           </li>
           <li>
             <a
               use:link
               on:click="{closeServices}"
-              class="list-link"
-              href="/grading">Grading and Excavating</a
+              class="{`list-link ${
+                currentPage === Paths.grading ? 'highlight' : ''
+              }`}"
+              href="{Paths.grading}">Grading and Excavating</a
             >
           </li>
           <li>
             <a
               use:link
               on:click="{closeServices}"
-              class="list-link"
-              href="/land-clearing">Land Clearing</a
+              class="{`list-link ${
+                currentPage === Paths.landClearing ? 'highlight' : ''
+              }`}"
+              href="{Paths.landClearing}">Land Clearing</a
             >
           </li>
           <li>
             <a
               use:link
               on:click="{closeServices}"
-              class="list-link"
-              href="/tree-removal">Tree Service</a
+              class="{`list-link ${
+                currentPage === Paths.treeRemoval ? 'highlight' : ''
+              }`}"
+              href="{Paths.treeRemoval}">Tree Service</a
             >
           </li>
         </ul>
       </div>
-      <a use:link class="desktop-link" href="/reviews"> Reviews </a>
-      <a use:link class="desktop-link" href="/about-us"> About Us </a>
-      <a use:link class="desktop-link contact-us-desktop" href="/contact-us">
+      <a
+        use:link
+        on:click="{closeServices}"
+        class="{`desktop-link ${
+          currentPage === Paths.reviews ? 'highlight' : ''
+        }`}"
+        href="{Paths.reviews}"
+      >
+        Reviews
+      </a>
+      <a
+        use:link
+        on:click="{closeServices}"
+        class="{`desktop-link ${
+          currentPage === Paths.aboutUs ? 'highlight' : ''
+        }`}"
+        href="{Paths.aboutUs}"
+      >
+        About Us
+      </a>
+      <a
+        use:link
+        on:click="{closeServices}"
+        class="{`desktop-link contact-us-desktop ${
+          currentPage === Paths.contactUs ? 'highlight' : ''
+        }`}"
+        href="{Paths.contactUs}"
+      >
         Contact Us
       </a>
     </nav>
@@ -187,6 +286,9 @@
     background-color: #eee;
     width: 95%;
   }
+  a {
+    color: #222222;
+  }
   .nav-mobile ul li {
     text-align: left;
     font-size: 15px;
@@ -196,7 +298,6 @@
     display: block;
     text-decoration: none;
     border-bottom: 1px solid #ddd;
-    color: #222222;
     background: #fff;
     padding: 8px 0px 8px 8px;
     font-weight: 600;
@@ -274,8 +375,15 @@
     top: 50px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   }
-
   .dropdown:hover .dropdown-content {
     display: block;
+  }
+  .highlight {
+    font-weight: 700;
+    font-size: 18px;
+    color: #ffc801;
+  }
+  .highlight:hover {
+    color: #be963e;
   }
 </style>
