@@ -18,6 +18,7 @@
         e.target,
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       );
+      console.log("result :>> ", result);
       console.log("SUCCESS!", result.text);
       showEmailSuccess = true;
       sendingEmail = false;
@@ -37,11 +38,13 @@
 </script>
 
 <div class="contact-container">
-  <div class="inner-contact-container">
-    <div class="reach-here">
-      <h3 class="contact-header">CONTACT US</h3>
-      <p>701-347-1545</p>
-      <p>team@jslandimprovement.com</p>
+  <div class="reach-here">
+    <h3 class="contact-header">CONTACT US</h3>
+    <div class="contact-info">
+      <div>
+        <p>701-347-1545</p>
+        <p>team@jslandimprovement.com</p>
+      </div>
       <a
         class="facebook-link"
         href="https://www.facebook.com/JSLandImprovement"
@@ -61,91 +64,42 @@
         >
       </a>
     </div>
-    <form on:submit|preventDefault="{sendEmail}">
-      {#if showEmailSuccess || showEmailFailed}
-        {#if showEmailSuccess}
-          <div class="alert success">
-            <p>Message sent successfully!</p>
-          </div>
-        {/if}
-        {#if showEmailFailed}
-          <div class="alert error">
-            <p>Message failed to send. Please try again.</p>
-          </div>
-        {/if}
-      {:else if sendingEmail}
-        <div class="alert neutral">
-          <p>Sending Message...</p>
-        </div>
-      {:else}
-        <div class="alert hidden">
-          <p>Message status</p>
-        </div>
-      {/if}
-      <div class="inputs">
-        <div class="name-phone">
-          <input
-            type="text"
-            required
-            name="name"
-            placeholder="Name"
-            class="input-box"
-            bind:value="{name}"
-          />
-          <input
-            type="text"
-            required
-            name="phone"
-            placeholder="Phone"
-            class="input-box"
-          />
-        </div>
-        <input
-          type="email"
-          required
-          name="email"
-          placeholder="Email"
-          class="input-box"
-        />
-        <textarea
-          name="message"
-          class="textarea input-box"
-          placeholder="Let us know what kind of project you have in mind or ask any questions you have!"
-        ></textarea>
-      </div>
-      <div class="submit-container">
-        <p class="math-problem">
-          {randomNumber1} + {randomNumber2} =
-        </p>
-        <input class="answer" type="text" required bind:value="{answer}" />
-        <input
-          type="submit"
-          value="Submit"
-          class="submit-button"
-          disabled="{randomNumber1 + randomNumber2 != answer || sendingEmail}"
-        />
-      </div>
-    </form>
   </div>
+  <div id="1852624f-2f6b-48cb-ab45-9ad2f5c085e5"></div>
+  <link
+    rel="stylesheet"
+    href="https://d3ey4dbjkt2f6s.cloudfront.net/assets/external/work_request_embed.css"
+    media="screen"
+  />
+  <script
+    src="https://d3ey4dbjkt2f6s.cloudfront.net/assets/static_link/work_request_embed_snippet.js"
+    clienthub_id="1852624f-2f6b-48cb-ab45-9ad2f5c085e5"
+    form_url="https://clienthub.getjobber.com/client_hubs/1852624f-2f6b-48cb-ab45-9ad2f5c085e5/public/work_request/embedded_work_request_form"
+  ></script>
 </div>
 
 <style>
   .contact-container {
-    padding: 80px 0 20px 0;
-    width: 100%;
+    text-align: left;
     border-top: 1px solid #222;
     background-color: #f7f7f7;
   }
-  .inner-contact-container {
+  .reach-here {
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    width: 90%;
-    margin: auto;
+    align-items: center;
+  }
+  .contact-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
   }
   .contact-header {
-    font-size: 20px;
+    font-size: 32px;
     text-transform: uppercase;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
   }
   p {
     font-size: 15px;
@@ -154,7 +108,6 @@
   .facebook-link {
     display: flex;
     align-items: center;
-    margin: 30px 0 8px 0;
     background-color: #3b5998;
     transition: linear 0.2s all;
     width: min-content;
@@ -267,17 +220,8 @@
     flex-direction: column;
   }
   @media (min-width: 1200px) {
-    .contact-container {
-      padding: 10px 0 20px 0;
-    }
-    .inner-contact-container {
-      display: grid;
-      grid-template-columns: 1fr 3fr;
-      justify-items: center;
-    }
     .reach-here {
-      margin-top: 70px;
-      margin-right: 40px;
+      margin-top: 30px;
     }
     .name-phone {
       display: grid;

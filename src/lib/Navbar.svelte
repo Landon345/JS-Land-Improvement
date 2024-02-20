@@ -3,7 +3,6 @@
   import MediaQuery from "svelte-media-queries";
   import { slide, fade } from "svelte/transition";
   import { Paths } from "./Paths";
-  import BrushClearing from "../routes/BrushClearing.svelte";
 
   let navBarOpen = false;
   let currentPage = window.location.pathname;
@@ -37,7 +36,8 @@
           stroke-linecap="round"
           stroke-linejoin="round"
           stroke-width="1.5"
-          d="M2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"></path></svg
+          d="M2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"
+        ></path></svg
       >
     </a>
     {#if navBarOpen}
